@@ -10,15 +10,15 @@
         {% if tasks1 %}
 
             <div class="">
-            <h1>Words1 = </h1>
-                <h3>{{tasks1.words1}}</h3><br>
-                <h1>Words2 = </h1>
-                <p>{{tasks1.words2}}</p><br>
+            <div class="display-5">Words1 = </div>
+                <p class="lead">{{tasks1.words1}}</p><br>
+                <div class="display-5">Words2 = </div>
+                <p class="lead">{{tasks1.words2}}</p><br>
             </div>
 
-            <h1>Result = </h1>
-            <h1>{{ res }}</h1>
-            <button type="button" class="btn btn-info btn-sm">
+            <div class="display-5">Result = </div>
+            <p class="lead">{{ res }}</p>
+            <button type="button" class="btn btn-secondary my-2">
                 <a href="{% url 'home' %}" style="color:white">
                     <i class="fas fa-pen"></i>Home
                 </a>

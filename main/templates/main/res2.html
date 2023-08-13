@@ -8,21 +8,21 @@
 
 {% block content %}
         {% if tasks2 %}
+            <div class="display-5">Massiv </div>
+                <p class="lead">{{tasks2.massiv}}</p><br>
+                <div class="display-5">Target </div>
+                <p class="lead">{{tasks2.target}}</p><br>
+            <div class="display-5">Indices:</div>
+            <ul>
+                {% for indices in indices_list %}
 
-            <div class="">
-            <h1>Massiv = </h1>
-                <h3>{{tasks2.massiv}}</h3><br>
-                <h1>Target = </h1>
-                <p>{{tasks2.target}}</p><br>
+                    <li >{{ indices }}</li>
+                {% endfor %}
+            </ul>
             </div>
 
-            <h1>Indices:</h1>
-        <ul>
-            {% for indices in indices_list %}
-                <li>{{ indices }}</li>
-            {% endfor %}
-        </ul>
-            <button type="button" class="btn btn-info btn-sm">
+
+            <button type="button" class="btn btn-secondary my-2">
                 <a href="{% url 'home' %}" style="color:white">
                     <i class="fas fa-pen"></i>Home
                 </a>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Task1, Task2
 from .forms import Task1Form, Task2Form
+import collections
 
 def index(request):
     tasks1 = Task1.objects.order_by('-id')
@@ -45,23 +46,22 @@ def task2(request):
 def calculate1(request, task1_id):
     task = get_object_or_404(Task1, id=task1_id)
     a, b = task.words1.split(), task.words2.split()
-    universal_words = []
-    res = ''
-    for word1 in a:
-        is_universal = True
-        for word2 in b:
-            sub_idx = 0
-            for char in word1:
-                if sub_idx < len(word2) and word2[sub_idx] == char:
-                    sub_idx += 1
-            if sub_idx < len(word2):
-                is_universal = False
-                break
 
-        if is_universal:
+    def is_universal(sub, super):
+        freq_sub = collections.Counter(sub)
+        freq_super = collections.Counter(super)
+        for char, freq in freq_sub.items():
+            if char not in freq_super or freq_super[char] < freq:
+                return False
+        return True
+
+    universal_words = []
+    for word1 in a:
+        is_universal_for_all = all(is_universal(word2, word1) for word2 in b)
+        if is_universal_for_all:
             universal_words.append(word1)
-    for el in universal_words:
-        res = res + ' ' + el
+
+    res = ' '.join(universal_words)
     return render(request, 'main/res1.html', {'tasks1': task, 'res': res})
 
 def calculate2(request, task2_id):
