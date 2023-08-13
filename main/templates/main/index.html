@@ -1,0 +1,62 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+
+{% block content %}
+    <h1>главная страница</h1>
+    <h1 class="nav-item nav-link"><a href="{% url 'task1' %}">Task 1:</a></h1>
+    <div>Даны два массива строк words1 и words2.<br>
+Строка b является подмножеством строки a, если каждая буква в b встречается в строке a в том числе и в кратном количестве.<br>
+Например, "wrr" является подмножеством "warrior", но не является подмножеством "world".<br>
+Строка a из words1 является универсальной, если для каждой строки b из words2 b является подмножеством a.<br>
+Возвращает массив всех универсальных строк в words1 Вы можете вернуть ответ в любом порядке.</div><br>
+        {% if tasks1 %}
+        {% for el in tasks1 %}
+            <div class="alert alert-warning mt-2">
+                <h3>{{el.words1}}</h3>
+                <p>{{el.words2}}</p>
+            <button type="button" class="btn btn-info btn-sm">
+                <a href="{% url 'calculate1' task1_id=el.id %}" style="color:white">
+                    <i class="fas fa-pen"></i>Calculate
+                </a>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm">
+                <a href="{% url 'delete1' task1_id=el.id %}" style="color:white">
+                    <i class="fas fa-pen"></i>Delete
+                </a>
+            </button>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Empty</p>
+    {% endif %}
+    <h1 class="nav-item nav-link"><a href="{% url 'task2' %}">Task 2:</a></h1>
+    <div>Если задан массив целых чисел nums и целое число target, то верните индексы двух чисел так, чтобы их сумма равнялась target.<br>
+Вы можете предположить, что каждый вход будет иметь ровно одно решение, и не можете использовать один и тот же элемент дважды.<br>
+Ответы можно возвращать в любом порядке.</div><br>
+
+    {% if tasks2 %}
+        {% for ell in tasks2 %}
+            <div class="alert alert-warning mt-2">
+                <h3>{{ell.massiv}}</h3>
+                <p>{{ell.target}}</p>
+            <button type="button" class="btn btn-info btn-sm">
+                <a href="{% url 'calculate2' task2_id=ell.id %}" style="color:white">
+                    <i class="fas fa-pen"></i>Calculate
+                </a>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm">
+                <a href="{% url 'delete2' task2_id=ell.id %}" style="color:white">
+                    <i class="fas fa-pen"></i>Delete
+                </a>
+            </button>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Empty</p>
+    {% endif %}
+{% endblock %}
